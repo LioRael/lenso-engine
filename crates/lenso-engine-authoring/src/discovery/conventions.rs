@@ -41,6 +41,12 @@ struct Convention {
 pub struct Compiler {
     pub program: String,
     pub args: Vec<String>,
+    /// Optional execution budget for this compiler only. Omitted values use
+    /// the Engine defaults, preserving the ordinary processor boundary.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub timeout_seconds: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub output_limit_bytes: Option<u64>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -302,6 +308,21 @@ pub fn plan(report: &DiscoveryReport) -> anyhow::Result<ConventionPlan> {
                     .context("standalone entry requires a convention compiler")?;
                 if compiler.program.is_empty() || compiler.args.len() > 32 {
                     bail!("invalid convention compiler command");
+                }
+                if compiler
+                    .timeout_seconds
+                    .is_some_and(|seconds| !(1..=300).contains(&seconds))
+                {
+                    bail!("convention compiler timeout_seconds must be between 1 and 300");
+                }
+                if compiler
+                    .output_limit_bytes
+                    .is_some_and(|bytes| !(1..=16 * 1024 * 1024).contains(&bytes))
+                {
+                    bail!(
+                        "convention compiler output_limit_bytes must be between 1 and {}",
+                        16 * 1024 * 1024
+                    );
                 }
                 let digest = Sha256::digest(surface.entry.as_bytes())
                     .iter()

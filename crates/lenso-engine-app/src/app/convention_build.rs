@@ -4,12 +4,24 @@ use lenso_app_authoring::discovery::{
     Candidate,
     conventions::{ConventionPlan, generated_candidate},
 };
-use std::{fs, path::Path, process::Command};
+use std::{fs, path::Path, process::Command, time::Duration};
 
 pub(super) fn compile(plan: &ConventionPlan, output: &Path) -> anyhow::Result<Vec<Candidate>> {
     let compiler_group = std::sync::Arc::new(std::sync::atomic::AtomicI32::new(0));
     let mut candidates = Vec::new();
     for compilation in &plan.compilations {
+        let budget = lenso_engine::process::ProcessBudget::new(
+            Duration::from_secs(
+                compilation
+                    .compiler
+                    .timeout_seconds
+                    .unwrap_or(lenso_engine::process::ProcessBudget::DEFAULT_TIMEOUT_SECONDS),
+            ),
+            compilation
+                .compiler
+                .output_limit_bytes
+                .unwrap_or(lenso_engine::process::ProcessBudget::DEFAULT_OUTPUT_LIMIT_BYTES),
+        )?;
         let project = output.join(&compilation.plugin_id);
         fs::create_dir(&project)?;
         let request = serde_json::json!({
@@ -30,6 +42,7 @@ pub(super) fn compile(plan: &ConventionPlan, output: &Path) -> anyhow::Result<Ve
                     args: compilation.compiler.args.clone(),
                     directory: compilation.compiler_project.clone(),
                 },
+                budget,
                 active_group: compiler_group.clone(),
             },
         ))?;

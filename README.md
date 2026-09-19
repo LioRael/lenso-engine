@@ -199,10 +199,13 @@ generations are retained; deletion/retention is an explicit host policy.
 - Input snapshots reject symlinks/special files and are bounded to 4096 entries,
   32 directory levels and 16 MiB. Source roots are explicit; the core has no
   language-specific `app/` or `node_modules` policy.
-- External tools have a 60-second execution budget, 128-MiB request ceiling and
-  1-MiB stdout/stderr ceilings. Unix cancellation/timeout terminates the process
-  group. Windows currently terminates the direct child; descendant isolation
-  requires a Windows Job Object host. No Windows execution proof is claimed here.
+- External tools have a default 60-second execution budget, 128-MiB request
+  ceiling and 1-MiB stdout/stderr ceilings. A selected App convention can declare
+  a compiler-specific `timeout_seconds` (1–300) and `output_limit_bytes`
+  (1–16 MiB) in its `compiler` metadata; omitted values retain those defaults.
+  Unix cancellation/timeout terminates the process group. Windows currently
+  terminates the direct child; descendant isolation requires a Windows Job Object
+  host. No Windows execution proof is claimed here.
 - Native processor cancellation is cooperative. App builds check cancellation
   between artifacts and before atomic publication; an in-progress package-manager
   command may finish before that checkpoint.

@@ -422,6 +422,39 @@ fn bare_entries_are_planned_without_running_the_selected_compiler() {
 }
 
 #[test]
+fn convention_compiler_budget_is_selected_and_bounded_before_execution() {
+    let root = tempfile::tempdir().unwrap();
+    support(root.path(), "app/support", "example.cli", "cli.ts");
+    let manifest = root.path().join("app/support/package.json");
+    let mut metadata: serde_json::Value =
+        serde_json::from_slice(&fs::read(&manifest).unwrap()).unwrap();
+    metadata["lenso"]["conventions"][0]["compiler"] = serde_json::json!({
+        "program": "must-not-run",
+        "args": [],
+        "timeout_seconds": 300,
+        "output_limit_bytes": 2 * 1024 * 1024,
+    });
+    fs::write(&manifest, serde_json::to_vec(&metadata).unwrap()).unwrap();
+    write(root.path(), "app/hello/cli.ts", "export {};\n");
+
+    let plan = conventions::plan(&discover(root.path()).unwrap()).unwrap();
+    assert_eq!(plan.compilations[0].compiler.timeout_seconds, Some(300));
+    assert_eq!(
+        plan.compilations[0].compiler.output_limit_bytes,
+        Some(2 * 1024 * 1024)
+    );
+
+    metadata["lenso"]["conventions"][0]["compiler"]["timeout_seconds"] = serde_json::json!(301);
+    fs::write(&manifest, serde_json::to_vec(&metadata).unwrap()).unwrap();
+    assert!(
+        conventions::plan(&discover(root.path()).unwrap())
+            .unwrap_err()
+            .to_string()
+            .contains("timeout_seconds")
+    );
+}
+
+#[test]
 fn convention_outputs_cannot_change_identity_or_activate_more_conventions() {
     let root = tempfile::tempdir().unwrap();
     bun(root.path(), "output", "example.other");
@@ -437,6 +470,8 @@ fn convention_outputs_cannot_change_identity_or_activate_more_conventions() {
         compiler: conventions::Compiler {
             program: "never-run".into(),
             args: vec![],
+            timeout_seconds: None,
+            output_limit_bytes: None,
         },
     };
     assert!(

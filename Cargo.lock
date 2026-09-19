@@ -1750,7 +1750,7 @@ dependencies = [
 
 [[package]]
 name = "lenso-engine"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "glob",
@@ -1763,7 +1763,7 @@ dependencies = [
 
 [[package]]
 name = "lenso-engine-app"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -1805,7 +1805,7 @@ dependencies = [
 
 [[package]]
 name = "lenso-engine-authoring"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "glob",
@@ -1830,7 +1830,7 @@ dependencies = [
 
 [[package]]
 name = "lenso-engine-host"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",

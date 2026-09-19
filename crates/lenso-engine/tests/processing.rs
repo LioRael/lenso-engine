@@ -179,3 +179,30 @@ fn cancelling_a_processor_kills_its_process_group() {
     });
     assert_eq!(active.load(Ordering::SeqCst), 0);
 }
+
+#[cfg(unix)]
+#[test]
+fn custom_process_budget_terminates_a_slow_processor() {
+    use lenso_engine::process::{ProcessBudget, ProcessSpec, execute_cancellable_with_budget};
+    use std::sync::atomic::AtomicI32;
+    let dir = tempfile::tempdir().unwrap();
+    let spec = ProcessSpec {
+        program: "/bin/sh".into(),
+        args: vec!["-c".into(), "sleep 1".into()],
+        directory: dir.path().into(),
+    };
+    let budget = ProcessBudget::new(std::time::Duration::from_millis(50), 1024).unwrap();
+    let error = execute_cancellable_with_budget(
+        &spec,
+        &serde_json::json!({}),
+        Arc::new(AtomicI32::new(0)),
+        &AtomicBool::new(false),
+        budget,
+    )
+    .unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("50 millisecond execution budget")
+    );
+}

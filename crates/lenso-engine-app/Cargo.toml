@@ -1,6 +1,6 @@
 [package]
 name = "lenso-engine-app"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 license = "MIT"
 description = "Optional Lenso App authoring preset"
@@ -8,7 +8,7 @@ include = ["/src/**", "/assets/**", "/examples/**", "/tests/**", "/build.rs", "/
 
 [dependencies]
 lenso-engine-runtime = { path = "../lenso-engine-runtime", version = "0.1.0" }
-lenso-engine = { path = "../lenso-engine", version = "0.1.0" }
+lenso-engine = { path = "../lenso-engine", version = "0.1.2" }
 anyhow = "1.0"
 futures = { version = "0.3" }
 shell-words = { version = "1.1" }
@@ -41,7 +41,7 @@ url = "2.5"
 zip = { version = "8.6", default-features = false, features = ["deflate-flate2-zlib-rs"] }
 jsonschema = { version = "0.51", default-features = false }
 glob = "0.3.3"
-lenso_app_authoring = { package = "lenso-engine-authoring", version = "0.1.0", path = "../lenso-engine-authoring" }
+lenso_app_authoring = { package = "lenso-engine-authoring", version = "0.2.0", path = "../lenso-engine-authoring" }
 
 [target.'cfg(unix)'.dependencies]
 nix = { version = "0.30", features = ["signal"] }

@@ -1,14 +1,14 @@
 [package]
 name = "lenso-engine-host"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 license = "MIT"
 description = "Standalone precompiled App Host and resolver for Lenso Engine embeddings"
 
 [dependencies]
-lenso-engine-app = { path = "../lenso-engine-app", version = "0.1.0" }
-lenso-engine-authoring = { path = "../lenso-engine-authoring", version = "0.1.0" }
-lenso-engine = { path = "../lenso-engine", version = "0.1.0" }
+lenso-engine-app = { path = "../lenso-engine-app", version = "0.2.0" }
+lenso-engine-authoring = { path = "../lenso-engine-authoring", version = "0.2.0" }
+lenso-engine = { path = "../lenso-engine", version = "0.1.2" }
 clap = { version = "4", features = ["derive"] }
 tokio = { version = "1.52", features = ["rt-multi-thread", "macros", "signal"] }
 serde_json = "1"
