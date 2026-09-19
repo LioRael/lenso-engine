@@ -1,0 +1,24 @@
+[package]
+name = "lenso-engine-runtime"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+lenso-engine = { path = "../lenso-engine", version = "0.1.0" }
+lenso-app-plan = "0.4.1"
+lenso-kernel = "0.3.3"
+lenso-native-adapter = "0.3.14"
+lenso-runner = "0.2.5"
+lenso-plugin-authoring = "0.2.0"
+lenso-contract-runtime = "0.2.0"
+futures = "0.3"
+tokio = { version = "1.52", features = ["rt-multi-thread", "time", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+lenso-guest-sdk = "0.5.0"
+lenso-runtime-codec = "0.4.1"
+
+[dev-dependencies]
+lenso-contract-codegen = "0.9.0"

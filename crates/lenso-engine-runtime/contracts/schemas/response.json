@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessResponse",
+  "type": "object",
+  "required": [
+    "output_json"
+  ],
+  "properties": {
+    "output_json": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

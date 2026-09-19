@@ -1,0 +1,6 @@
+{
+  "schema": "lenso.engine-workflow.v1",
+  "sources": ["content"],
+  "plugin_sources": ["plugins"],
+  "plugins": ["lenso.markdown.v1"]
+}

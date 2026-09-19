@@ -1,0 +1,47 @@
+[package]
+name = "lenso-engine-app"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Optional Lenso App authoring preset"
+include = ["/src/**", "/assets/**", "/examples/**", "/tests/**", "/build.rs", "/Cargo.toml"]
+
+[dependencies]
+lenso-engine-runtime = { path = "../lenso-engine-runtime", version = "0.1.0" }
+lenso-engine = { path = "../lenso-engine", version = "0.1.0" }
+anyhow = "1.0"
+futures = { version = "0.3" }
+shell-words = { version = "1.1" }
+clap = { version = "4", features = ["derive", "string"] }
+lenso-app-plan = { version = "0.4.1" }
+lenso-bun-adapter = { version = "=0.1.10" }
+lenso-contract-authoring-next = { package = "lenso-contract-authoring", version = "0.1.1" }
+lenso-contract-codegen-next = { package = "lenso-contract-codegen", version = "0.9.0" }
+lenso-contract-runtime = { version = "0.2.0" }
+lenso-plugin-authoring = { version = "0.2.0" }
+lenso-guest-sdk = { version = "0.5.0" }
+lenso-kernel = { version = "0.3.3" }
+lenso-plugin-bundle = { version = "0.4.2" }
+lenso-plugin-catalog = { path = "../lenso-plugin-catalog", version = "0.1.0", features = ["bundle-verification"] }
+lenso-process-adapter = { version = "=0.3.11" }
+lenso-runner = { version = "0.2.5" }
+lenso-runtime-codec = { version = "=0.4.1" }
+lenso-wasm-component-adapter = { version = "=0.2.13" }
+notify = { version = "8.2" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.11"
+rustix = { version = "1.1", features = ["fs"] }
+tempfile = { workspace = true }
+tokio = { version = "1.52", features = ["fs", "io-util", "macros", "net", "process", "rt-multi-thread", "signal", "sync", "time"] }
+toml = { workspace = true }
+uuid = { version = "1", features = ["v7"] }
+ureq = { version = "2.12", default-features = false, features = ["tls"] }
+url = "2.5"
+zip = { version = "8.6", default-features = false, features = ["deflate-flate2-zlib-rs"] }
+jsonschema = { version = "0.51", default-features = false }
+glob = "0.3.3"
+lenso_app_authoring = { package = "lenso-engine-authoring", version = "0.1.0", path = "../lenso-engine-authoring" }
+
+[target.'cfg(unix)'.dependencies]
+nix = { version = "0.30", features = ["signal"] }

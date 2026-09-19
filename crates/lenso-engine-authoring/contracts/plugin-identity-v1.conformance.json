@@ -1,0 +1,38 @@
+{
+  "schema": "lenso.plugin-identity.v1",
+  "pluginId": {
+    "valid": [
+      "company.uppercase",
+      "lenso.agent-tool",
+      "acme2.support-bot.v2"
+    ],
+    "invalid": [
+      "uppercase",
+      "Company.uppercase",
+      "2company.uppercase",
+      "company..uppercase",
+      "company._uppercase",
+      "company.-uppercase",
+      "company.uppercase-",
+      "company.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "company/uppercase"
+    ]
+  },
+  "version": {
+    "valid": [
+      "0.1.0",
+      "1.2.3-alpha.1",
+      "2.0.0-rc.1+build.7"
+    ],
+    "invalid": [
+      "1",
+      "1.2",
+      "01.2.3",
+      "1.02.3",
+      "v1.2.3",
+      "latest",
+      "1.2.3-01"
+    ]
+  }
+}

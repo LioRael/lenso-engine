@@ -1,0 +1,7 @@
+{
+  "schema": "lenso.engine-plugin.v1",
+  "identity": "lenso.markdown.v1",
+  "entries": ["*.md", "**/*.md"],
+  "program": "lenso-engine-worker",
+  "args": []
+}

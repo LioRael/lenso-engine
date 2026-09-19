@@ -1,0 +1,16 @@
+{
+  "envelope": {
+    "key_id": "test-key",
+    "payload_base64": "eyJzY2hlbWEiOiJsZW5zby5tYXJrZXRwbGFjZS5zbmFwc2hvdC52MSIsImNhdGFsb2dfaWQiOiJjb25mb3JtYW5jZS1vbmx5IiwicmV2aXNpb24iOjEsImlzc3VlZF9hdCI6MTAwLCJleHBpcmVzX2F0IjoyMDAsInJlbGVhc2VzIjpbXX0=",
+    "signature_base64": "d72/vbOdb7CmYW60a6JCb5zli2TN+mO/QPu6ui9PIIt+ZPzwIl3UAi7fewVtbTG0lK8QF1TcNLmFPMPR7pQMBw=="
+  },
+  "expected_payload": {
+    "catalog_id": "conformance-only",
+    "expires_at": 200,
+    "issued_at": 100,
+    "releases": [],
+    "revision": 1,
+    "schema": "lenso.marketplace.snapshot.v1"
+  },
+  "public_key_hex": "d04ab232742bb4ab3a1368bd4615e4e6d0224ab71a016baf8520a332c9778737"
+}

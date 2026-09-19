@@ -1,0 +1,15 @@
+{
+  "id": "lenso.engine.processor@1",
+  "version": "1.0.0",
+  "portable": true,
+  "cross_lane_transfer": false,
+  "operations": [
+    {
+      "name": "process",
+      "interaction": "request",
+      "request_schema": "schemas/request.json",
+      "response_schema": "schemas/response.json",
+      "domain_error_schema": "schemas/error.json"
+    }
+  ]
+}

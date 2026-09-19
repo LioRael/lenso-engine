@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessRequest",
+  "type": "object",
+  "required": [
+    "input_json"
+  ],
+  "properties": {
+    "input_json": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
