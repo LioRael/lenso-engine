@@ -66,8 +66,6 @@ pub fn execute_cancellable(
     #[cfg(unix)]
     let group = CompilerGroup::new(active.clone(), child.id());
     let mut child = ChildGuard(child);
-    #[cfg(not(unix))]
-    let mut child = ChildGuard(child);
     let deadline = Instant::now() + Duration::from_secs(60);
     let status = loop {
         if let Some(status) = child.try_wait()? {
