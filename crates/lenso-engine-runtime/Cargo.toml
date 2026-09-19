@@ -3,6 +3,8 @@ name = "lenso-engine-runtime"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
+description = "Plan-bound processor capability and native runtime lowering for Lenso Engine"
+repository.workspace = true
 
 [dependencies]
 lenso-engine = { path = "../lenso-engine", version = "0.1.0" }
