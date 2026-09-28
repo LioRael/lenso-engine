@@ -1,5 +1,10 @@
 # Lenso Engine
 
+> **Source location:** This repository retains pre-consolidation history. New
+> Rust Engine work belongs in [LioRael/lenso](https://github.com/LioRael/lenso)
+> under [ADR 0077](https://github.com/LioRael/lenso/blob/main/docs/adr/0077-consolidate-the-rust-main-chain-by-language-and-product.md).
+> The description below documents this historical checkout.
+
 An independently embeddable authoring layer over Lenso. The Engine plans work
 from immutable input snapshots and executes explicitly selected processors.
 File conventions, languages, and App composition belong to optional packages.
